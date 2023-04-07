@@ -2,11 +2,11 @@ package org.classDescriptor.models;
 
 public class Attributes {
     String Name;
-    String Variable;
+    Character Variable;
     String Scope;
     String Signature;
 
-    public Attributes(String name, String variable, String scope, String signature) {
+    public Attributes(String name, Character variable, String scope, String signature) {
         Name = name;
         Variable = variable;
         Scope = scope;
@@ -21,11 +21,11 @@ public class Attributes {
         Name = name;
     }
 
-    public String getVariable() {
+    public Character getVariable() {
         return Variable;
     }
 
-    public void setVariable(String variable) {
+    public void setVariable(Character variable) {
         Variable = variable;
     }
 
