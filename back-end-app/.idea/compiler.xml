@@ -6,8 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="back-end-app" />
+        <module name="ClaroTest" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="back-end-app" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>
