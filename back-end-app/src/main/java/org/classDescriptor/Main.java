@@ -5,65 +5,34 @@ classDescriptor;
 import org.classDescriptor.models.Attributes;
 import org.classDescriptor.models.ClassesModel;
 
-import javax.smartcardio.ATR;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-    public static void main(String[] args) {
-        ArrayList<Attributes> attributes;
+    public static void main(String[] args) throws IOException {
+        Path path = Paths.get(System.getProperty("user.dir"), args);
 
-        // Replace this string with the text of the Java class you want to describe
-        String classText = "// Person.txt\n" +
-                "\n" +
-                "public class Person {\n" +
-                "\n" +
-                " \n" +
-                "\n" +
-                "    private int year = 0;\n" +
-                "\n" +
-                " \n" +
-                "\n" +
-                "    public void getOlder(int year) {\n" +
-                "\n" +
-                "        if(year <= 0) {\n" +
-                "\n" +
-                "            return;\n" +
-                "\n" +
-                "        }\n" +
-                "\n" +
-                "        this.year += year;\n" +
-                "\n" +
-                "    }\n" +
-                "\n" +
-                "    public String eat() {\n" +
-                "\n" +
-                "        return eat(\"chicken\");\n" +
-                "\n" +
-                "    }\n" +
-                "\n" +
-                "    public String eat(String food) {\n" +
-                "\n" +
-                "        if(year <= 1) {\n" +
-                "\n" +
-                "            return \"eating milk...\";\n" +
-                "\n" +
-                "        }\n" +
-                "\n" +
-                "        return \"eating \" + food + \"...\";\n" +
-                "\n" +
-                "    }\n" +
-                "\n" +
-                "}";
+        if(args.length < 1 || !Files.exists(path)) {
+            System.out.println("Please provide a valid File Name...");
+            System.out.println("Provided path: " + path);
+            return;
+        }
+
+        List<String> allLines = Files.readAllLines(path, StandardCharsets.UTF_8);
 
         String className, scope, constructor;
         className = scope = constructor = "";
 
         ArrayList<Attributes> fields = new ArrayList<>();
 
-        // Split the class text into lines
-        String[] lines = classText.split("\n");
-        for (String line : lines) {
+        for (String line : allLines) {
             className = getClassName(line, className);
             scope = getScope(line, scope);
             constructor = getConstructor(line, className, constructor);
